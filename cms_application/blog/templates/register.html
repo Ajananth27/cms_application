@@ -1,0 +1,60 @@
+{% load static %}
+{% block page_header %}
+    {% include 'base.html' %}
+{% endblock %}
+
+<style>
+    body {
+        text-align: center;
+        font-size: large; 
+    }
+    .form-verticle {
+        padding-top: 36%;
+        padding-bottom: 37%;
+        background-color: #ffffff;
+    }
+    
+    .form-horizontal {
+        height: 50%;
+        width: 50%;
+        align-items: center;
+    }
+</style>
+
+{% block page_content %}
+<div class="container-fluid">
+    <div class="col-md-3">
+        <div class="container-fluid well">
+        </div>
+    
+    </div>
+    <div class="col-md-6" id = "login">
+        <div class="row">
+        <form action="/register" method="POST" class="form-verticle">
+            {% csrf_token %}
+            <h2>Registration</h2>
+            <div class="form-group">
+                <label for="username">Username :</label> 
+                <input id="username" name="username" type="text" placeholder="username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email :</label> 
+                <input id="email" name="email" type="text" placeholder="xyz@gmail.com" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password :</label>
+                <input id="password" name="password" type="password" placeholder="password" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Connfirm Password :</label>
+                <input id="password" name="confirm_password" type="password" placeholder="password" required>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+        </form>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

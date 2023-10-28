@@ -1,0 +1,93 @@
+{% load static %}
+{% block page_header %}
+    {% include 'base.html' %}
+{% endblock %}
+
+<style>
+    body {
+        text-align: center;
+        font-size: large; 
+    }
+    .form-verticle {
+        padding-top: 36%;
+        padding-bottom: 37%;
+        background-color: #ffffff;
+    }
+    
+    .form-horizontal {
+        height: 50%;
+        width: 50%;
+        align-items: center;
+    }
+</style>
+
+{% block page_content %}
+<div class="navAdmin">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <nav class="navbar-header">
+            <div><a href="#" class="navbar-brand">CMS</a></div>
+        </nav>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="home">Home</a></li>
+            <li><a href="logout">Logout</a></li>
+        </ul>
+    </nav>
+</div>
+<div class="col-lg-12 db-page-heading" style="padding-top: 5%">
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == "success" %}
+                <div class="alert alert-success border-0 mb-3" role="alert" style="font-size: 14px;">
+                    {{ message }}
+                </div>
+            {% else %}
+                <div class="alert alert-danger border-0 mb-3" role="alert" style="font-size: 14px;">
+                    {{ message }}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</div>
+<div class="container-fluid">
+    <div class="col-md-3">    
+    </div>
+    <div class="col-md-6" id = "login">
+        <div class="row">
+        <form action="create_blob" method="POST" class="form-verticle">
+            {% csrf_token %}
+            <div class="container">
+                <div class="row">
+                  <div class="col-md-12">
+                      <div class="form-group">
+                        <input type="text" class="form-control" name="title" value = "{{data.title}}" placeholder="Title"/>
+                      </div>
+                      <div class="form-group">
+                        <label> Image </label>
+                        <div class="input-group">
+                          
+                          <span class="input-group-btn">
+                            <span class="btn btn-primary btn-file">
+                              Browse <input type="file" name="image" multiple>
+                            </span>
+                           </span>
+                          <input type="text" value = "{{data.image}}" class="form-control" readonly>
+                         </div>
+                      </div>
+                      <div class="form-group">
+                        <textarea class="form-control bcontent" name="content" value = "{{data.content}}" placeholder="Content"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <input type="text" class="form-control" name="author" value = "{{data.author}}" placeholder="Author"/>
+                      </div>
+                      <div>
+                        <button type="submit" class="btn btn-primary">Publish</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </form>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}
